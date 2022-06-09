@@ -1,6 +1,7 @@
 class Computer:
-    def __init__(self, pc_id, value):
+    def __init__(self, pc_id, name, value):
         self.pc_id = pc_id
+        self.name = name
         self.value = value
         self.failed = False
 
