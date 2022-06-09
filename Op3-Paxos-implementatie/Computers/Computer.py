@@ -1,7 +1,6 @@
 class Computer:
-    def __init__(self, pc_id, name, value):
+    def __init__(self, pc_id, value):
         self.pc_id = pc_id
-        self.name = name
         self.value = value
         self.failed = False
 
@@ -9,6 +8,9 @@ class Computer:
         print(f'** {self.pc_id} kapot **')
         self.failed = True
 
-    def computer_repair(self):
+    def computer_recover(self):
         print(f'** {self.pc_id} gerepareerd **')
         self.failed = False
+
+    def __str__(self):
+        return f'{self.pc_id}'

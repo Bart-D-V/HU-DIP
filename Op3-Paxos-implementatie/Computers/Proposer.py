@@ -5,8 +5,8 @@ from Messages import Message
 class Proposer(Computer):
     propose_id = 0
 
-    def __init__(self, pc_id, name, value=None):
-        super().__init__(pc_id, name, value)
+    def __init__(self, pc_id, value=None):
+        super().__init__(pc_id, value)
         self.propose_id = None
         self.proposed_value = None
         self.agreement = False
@@ -41,7 +41,6 @@ class Proposer(Computer):
         elif message.message_type == 'REJECTED':
             self.rejected += 1
             if self.rejected >= majority and self.accepted + self.rejected == n_acceptors:
-                self.value = self.proposed_value
                 self.accepted = 0
                 self.rejected = 0
                 return True

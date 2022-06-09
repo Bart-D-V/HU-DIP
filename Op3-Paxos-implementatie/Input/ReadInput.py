@@ -1,5 +1,5 @@
 from Messages import Message
-from Input import Event
+from Input.Event import Event
 from Computers import Acceptor, Proposer
 
 proposers, acceptors = {}, {}
@@ -7,7 +7,7 @@ proposers, acceptors = {}, {}
 
 def propose(tick, message_type, msg_info):
     proposer_id, proposed_value = [int(msg_info[0]), int(msg_info[1])]
-    proposers[proposer_id].set_proposer_value(proposed_value)
+    proposers[proposer_id].set_proposed_value(proposed_value)
     message = Message(None, proposers[proposer_id], message_type)
 
     return Event(tick, [], [], message)
@@ -63,10 +63,10 @@ def read_input(file):
 
     with open(file, 'r') as inp:
         n_proposers, n_acceptors, max_ticks = [int(value) for value in inp.readline().split()]
-        proposers = {id: Proposer('P' + str(id), id) for id in range(1, n_proposers + 1)}
-        acceptors = {id: Acceptor('A' + str(id), id) for id in range(1, n_acceptors + 1)}
+        proposers = {id: Proposer('P' + str(id)) for id in range(1, n_proposers + 1)}
+        acceptors = {id: Acceptor('A' + str(id)) for id in range(1, n_acceptors + 1)}
 
-        lines = file.read().splitlines()[:1]
+        lines = inp.read().splitlines()[:-1]
         for line in lines:
             event = make_event(line)
             events[event.tick] = event

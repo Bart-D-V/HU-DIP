@@ -3,8 +3,8 @@ from Messages import Message
 
 
 class Acceptor(Computer):
-    def __init__(self, pc_id, name, value=None):
-        super().__init__(pc_id, name, value)
+    def __init__(self, pc_id, value=None):
+        super().__init__(pc_id, value)
         self.propose_id = 0
 
     def take_in_prepare(self, message):

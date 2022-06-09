@@ -12,6 +12,7 @@ class Network:
 
     def extract_message(self):
         for message in self.msg_queue:
+
             if not message.source.failed and not message.destination.failed:
                 self.msg_queue.remove(message)
 
@@ -19,7 +20,7 @@ class Network:
 
     def send_propose(self, message):
         prepare_message = message.destination.take_in_propose(message)
-        [self.queue_message(prepare_message(acceptor)) for acceptor in self.acceptors]
+        [self.queue_message(prepare_message(acceptor)) for acceptor in self.acceptors.values()]
 
     def send_prepare(self, message):
         promise_message = message.destination.take_in_prepare(message)
