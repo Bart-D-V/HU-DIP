@@ -45,6 +45,11 @@ class Proposer(Computer):
             self.send_accept = True
             return lambda acceptor: Message(message.destination, acceptor, message.ACCEPT)
 
+    """
+    proposer kijkt of de message een ACCEPTED of REJECTED message is.
+    bij een ACCEPTED gaat de accepted var met 1 omhoog, en als accepted de meerderheid is er een agreement.
+    bij een REJECTED gaat de rejected var met 1 omhoog, en als rejected de meerderheid is word de proposer gereset.
+    """
     def take_in_accepted_or_rejected(self, message, n_acceptors):
         majority = n_acceptors / 2
 

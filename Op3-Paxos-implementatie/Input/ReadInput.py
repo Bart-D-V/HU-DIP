@@ -4,7 +4,7 @@ from Computers import Acceptor, Proposer
 
 proposers, acceptors = {}, {}
 
-
+""" pakt event data en geeft een propose message terug """
 def propose(tick, message_type, msg_info):
     proposer_id, proposed_value = [int(msg_info[0]), int(msg_info[1])]
     proposers[proposer_id].set_proposed_value(proposed_value)
@@ -13,6 +13,7 @@ def propose(tick, message_type, msg_info):
     return Event(tick, [], [], message)
 
 
+""" krijgt een computer type en ids en geeft een lijst terug met die computers."""
 def get_computers(computer_info):
     computer_type = computer_info[0]
     computer_ids = [int(id) for id in computer_info[1:]]
@@ -29,6 +30,7 @@ def get_computers(computer_info):
     return computers
 
 
+""" pakt event data en geeft een event met alle computers die failen."""
 def fail(tick, message_type, computers):
     failed = get_computers(computers)
     message = Message(None, None, message_type)
@@ -36,13 +38,14 @@ def fail(tick, message_type, computers):
     return Event(tick, failed, [], message)
 
 
+""" pakt event data en geeft een event met alle computers de recovered worden."""
 def recover(tick, message_type, computers):
     recovered = get_computers(computers)
     message = Message(None, None, message_type)
 
     return Event(tick, [], recovered, message)
 
-
+""" maakt een event bij het passende message type en geeft hem als return."""
 def make_event(line):
     tick, message_type, *msg_info = line.split()
     tick = int(tick)
@@ -57,6 +60,11 @@ def make_event(line):
     return event
 
 
+"""
+leest de file waar de comments voor de simulatie staan. uit de eerste regels worden de proposers en acceptors gemaakt.
+daarna word iedere line een voor een geleest en word er een event van gemaakt,
+en geeft de computers, ticks en events als input variable voor de simulatie
+"""
 def read_input(file):
     events = {}
     global proposers, acceptors

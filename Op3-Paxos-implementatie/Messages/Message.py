@@ -12,6 +12,7 @@ class Message:
         self.destination = destination
         self.message_type = message_type
 
+    """ leest het message_type en geeft de juiste output terug om te printen"""
     def get_output_info(self):
         if self.message_type == Message.PROPOSE: return f'v={self.destination.proposed_value}'
         elif self.message_type == Message.PREPARE: return f'n={self.source.propose_id}'
