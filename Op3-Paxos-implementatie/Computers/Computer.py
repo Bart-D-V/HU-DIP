@@ -4,10 +4,12 @@ class Computer:
         self.value = value
         self.failed = False
 
+    """functie om een computer kapot te maken."""
     def computer_fail(self):
         print(f'** {self.pc_id} kapot **')
         self.failed = True
 
+    """functie om een computer gerepareerd te maken."""
     def computer_recover(self):
         print(f'** {self.pc_id} gerepareerd **')
         self.failed = False

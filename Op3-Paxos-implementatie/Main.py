@@ -12,7 +12,6 @@ def simulatie(proposers, acceptors, tmax, events):
             break
 
         print(f'{str(i).zfill(3)}: ', end='')
-
         if i in events.keys():
             event = events[i]
         else:
@@ -39,6 +38,8 @@ def simulatie(proposers, acceptors, tmax, events):
         if proposer.agreement:
             print(
                 f'{proposer} heeft wel consensus (voorgesteld: {proposer.proposed_value}, geaccepteerd: {proposer.value})')
+        else:
+            print(f'{proposer} heeft geen consensus bereikt.')
 
 
 input_variables = read_input('Input/voorbeeld2.txt')

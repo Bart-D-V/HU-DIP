@@ -27,8 +27,9 @@ class Network:
         self.queue_message(promise_message)
 
     def send_promise(self, message):
-        accept_message = message.destination.take_in_promise(message)
-        self.queue_message(accept_message)
+        accept_message = message.destination.take_in_promise(message, len(self.acceptors))
+        if accept_message is not None:
+            [self.queue_message(accept_message(acceptor)) for acceptor in self.acceptors.values()]
 
     def send_accept(self, message):
         accepted_rejected_message = message.destination.take_in_accept(message)
